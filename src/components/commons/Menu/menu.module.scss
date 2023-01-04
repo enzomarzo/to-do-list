@@ -1,0 +1,49 @@
+.cmp-menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  pointer-events: auto;
+  width: 240px;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  box-shadow: rgb(255 255 255 / 5%) -1px 0px 0px 0px inset;
+
+  &__add-note {
+    display: flex;
+
+    &-input {
+      display: block;
+      width: 100%;
+      padding: 4px;
+      margin-right: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    &-button {
+      display: inline-block;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
+      background-color: rgb(220, 220, 220);
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: rgba(220, 220, 220, 0.8);
+      }
+    }
+  }
+
+  &__list {
+    &-items {
+      padding: 4px 0;
+    }
+  }
+}
