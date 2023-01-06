@@ -65,7 +65,6 @@ const useNotes = (): IUseNotes => {
   };
 
   const getNote = useCallback((id: string) => {
-    console.log(id)
     const note = storedNotes && storedNotes.find(elem => elem.id === id)
     return note
   },[storedNotes])
