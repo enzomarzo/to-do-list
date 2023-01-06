@@ -1,0 +1,33 @@
+@import '../../../../styles/color-mappings';
+
+.cmp-note {
+  width: 100%;
+  padding: 20px;
+
+  &__title {
+    display: block;
+    text-align: center;
+
+    &-input {
+      background-color: $color-background-dark;
+      color: $color-text-dark;
+      border: none;
+      outline: none;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  &__content {
+    padding-top: 20px;
+    background: transparent;
+    border: none;
+  }
+
+  &__edit-button {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
+
+}
