@@ -1,10 +1,14 @@
 import Head from 'next/head'
-import { Inter } from '@next/font/google'
-import Nav from '../src/components/commons/Nav'
+import { Montserrat } from '@next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+import Menu from '../src/components/commons/Menu'
+import Note from '../src/components/commons/Note'
+import useNotes, { IUseNotes } from '../src/hooks/useNotes'
+
+const montserrat = Montserrat({ subsets: ['latin'] })
 
 export default function Home() {
+  const noteActions = useNotes()
   return (
     <>
       <Head>
@@ -13,8 +17,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <Nav />
+      <main className={montserrat.className}>
+        <Menu noteActions={noteActions} />
+        <Note noteActions={noteActions} />
       </main>
     </>
   )
