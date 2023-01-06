@@ -1,13 +1,15 @@
+@import '../../../../styles/color-mappings';
+
 .cmp-menu {
   display: flex;
   flex-direction: column;
-  height: 100%;
   pointer-events: auto;
-  width: 240px;
+  min-width: 200px;
+  width: 200px;
   top: 0;
   left: 0;
   padding: 15px;
-  box-shadow: rgb(255 255 255 / 5%) -1px 0px 0px 0px inset;
+  box-shadow: rgb(255 255 255 / 10%) -3px 0px 0px 0px inset;
 
   &__add-note {
     display: flex;
@@ -15,7 +17,7 @@
     &-input {
       display: block;
       width: 100%;
-      padding: 4px;
+      padding: 0px 8px;
       margin-right: 8px;
       border: 1px solid #ddd;
       border-radius: 4px;
@@ -32,18 +34,50 @@
       text-align: center;
       text-decoration: none;
       white-space: nowrap;
-      background-color: rgb(220, 220, 220);
+      background-color: transparent;
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: rgba(220, 220, 220, 0.8);
+        background-color: rgba($color-text-dark, 0.15);
       }
+    }
+
+    &-icon {
+      background-color: transparent;
+      color: $color-text-dark;
     }
   }
 
   &__list {
+    width: 100%;
+
     &-items {
-      padding: 4px 0;
+      display: flex;
+      cursor: pointer;
+
+      &-link {
+        padding: 6px 0;
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      &-text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex-grow: 1;
+      }
+
+      &-remove {
+        margin-left: auto;
+      }
+
+      &-icon {
+        background-color: transparent;
+        margin-right: 4px;
+        color: $color-text-dark;
+      }
     }
   }
 }
