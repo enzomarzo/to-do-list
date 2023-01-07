@@ -53,6 +53,7 @@ const Note = ({ noteActions }: IProps) => {
           placeholder="Name a title"
           className={styles['cmp-note__title-input']}
           value={title}
+          aria-label="Note title"
           onChange={onChangeTitle}
         />
       </h1>
@@ -60,6 +61,7 @@ const Note = ({ noteActions }: IProps) => {
         className={styles['cmp-note__content']}
         rows={10}
         value={content}
+        aria-label="Note content"
         onChange={onChangeContent}
         placeholder="Add your notes. Do not forget to save it :)"
       />

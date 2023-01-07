@@ -28,9 +28,15 @@ const Menu = ({ noteActions }: IProps) => {
           addNote(imputEl.value);
           form.reset();
         }}>
-        <input placeholder="add a note title" className={styles['cmp-menu__add-note-input']} name="note" />
+        <input
+          placeholder="add a note title"
+          aria-label="note Title"
+          className={styles['cmp-menu__add-note-input']}
+          name="note"
+        />
         <button className={styles['cmp-menu__add-note-button']} type="submit">
           <AiOutlinePlus size="1.2em" className={styles['cmp-menu__add-note-icon']} />
+          <span className={styles['cmp-menu__add-note-text']}>Add note</span>
         </button>
       </form>
 
@@ -46,7 +52,8 @@ const Menu = ({ noteActions }: IProps) => {
               </Link>
 
               <Button iconOnly className={styles['cmp-menu__list-items-remove']} onClick={() => onRemove(note)}>
-                <AiFillDelete className={styles['cmp-menu__list-items-icon']} />
+                <AiFillDelete className={styles['cmp-menu__list-items-remove-icon']} />
+                <span className={styles['cmp-menu__list-items-remove-text']}>Delete note</span>
               </Button>
             </div>
           ))}
