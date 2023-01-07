@@ -1,14 +1,14 @@
-import Head from 'next/head'
-import { Montserrat } from '@next/font/google'
+import Head from 'next/head';
+import { Montserrat } from '@next/font/google';
 
-import Menu from '../src/components/commons/Menu/Menu'
-import Note from '../src/components/commons/Note/Note'
-import useNotes, { IUseNotes } from '../src/hooks/useNotes'
+import Menu from '../src/components/commons/Menu/Menu';
+import Note from '../src/components/commons/Note/Note';
+import useNotes, { IUseNotes } from '../src/hooks/useNotes';
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export default function Home() {
-  const noteActions = useNotes()
+  const noteActions = useNotes();
   return (
     <>
       <Head>
@@ -22,5 +22,5 @@ export default function Home() {
         <Note noteActions={noteActions} />
       </main>
     </>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import { useState, useEffect, memo, useCallback } from "react";
-import { useRouter } from "next/router";
-import querystring from "querystring";
+import { useState, useEffect, memo, useCallback } from 'react';
+import { useRouter } from 'next/router';
+import querystring from 'querystring';
 
 export interface INote {
   id: string; // Date.now() just to keep it simple, without having an external lib and being able to use a unique key
@@ -16,7 +16,7 @@ export interface IUseNotes {
   getNote: (id: string) => INote | undefined;
 }
 
-const LOCAL_STORAGE_KEY = "notes";
+const LOCAL_STORAGE_KEY = 'notes';
 
 const useNotes = (): IUseNotes => {
   const router = useRouter();
@@ -25,7 +25,7 @@ const useNotes = (): IUseNotes => {
   // next js renders server side so it is needed a useEffect
   useEffect(() => {
     const storedNote = localStorage.getItem(LOCAL_STORAGE_KEY);
-    setStoredNotes(storedNote ? JSON.parse(storedNote) : "");
+    setStoredNotes(storedNote ? JSON.parse(storedNote) : '');
   }, []);
 
   useEffect(() => {
@@ -34,23 +34,23 @@ const useNotes = (): IUseNotes => {
     }
   }, [storedNotes]);
 
-  const addNote = useCallback((title: string) => {
-    if(!title) return
-    const newNote: INote = { id: Date.now().toString(), title, content: "" };
-    setStoredNotes([...storedNotes, newNote]);
+  const addNote = useCallback(
+    (title: string) => {
+      if (!title) return;
+      const newNote: INote = { id: Date.now().toString(), title, content: '' };
+      setStoredNotes([...storedNotes, newNote]);
 
-    localStorage.setItem(
-      LOCAL_STORAGE_KEY,
-      JSON.stringify([...storedNotes, newNote])
-    );
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...storedNotes, newNote]));
 
-    // create a new route query with the note ID
-    const queryString = querystring.stringify(router.query);
-    const searchParams = new URLSearchParams(queryString);
-    searchParams.set("noteId", newNote.id);
-    const query = querystring.parse(searchParams.toString());
-    router.push({ pathname: router.pathname, query });
-  }, [router, storedNotes]);
+      // create a new route query with the note ID
+      const queryString = querystring.stringify(router.query);
+      const searchParams = new URLSearchParams(queryString);
+      searchParams.set('noteId', newNote.id);
+      const query = querystring.parse(searchParams.toString());
+      router.push({ pathname: router.pathname, query });
+    },
+    [router, storedNotes]
+  );
 
   const deleteNote = (note: INote) => {
     const updatedNotes = storedNotes.filter((n) => n !== note);
@@ -64,17 +64,20 @@ const useNotes = (): IUseNotes => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedNotes));
   };
 
-  const getNote = useCallback((id: string) => {
-    const note = storedNotes && storedNotes.find(elem => elem.id === id)
-    return note
-  },[storedNotes])
+  const getNote = useCallback(
+    (id: string) => {
+      const note = storedNotes && storedNotes.find((elem) => elem.id === id);
+      return note;
+    },
+    [storedNotes]
+  );
 
   return {
     notes: storedNotes,
     addNote,
     deleteNote,
     editNote,
-    getNote,
+    getNote
   };
 };
 
