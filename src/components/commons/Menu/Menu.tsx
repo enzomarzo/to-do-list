@@ -28,7 +28,7 @@ const Menu = ({ noteActions }: IProps) => {
           addNote(imputEl.value);
           form.reset();
         }}>
-        <input className={styles['cmp-menu__add-note-input']} name="note" />
+        <input placeholder="add a note title" className={styles['cmp-menu__add-note-input']} name="note" />
         <button className={styles['cmp-menu__add-note-button']} type="submit">
           <AiOutlinePlus size="1.2em" className={styles['cmp-menu__add-note-icon']} />
         </button>
