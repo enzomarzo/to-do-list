@@ -1,16 +1,41 @@
 @import '../../../../styles/color-mappings';
 @import '../../../../styles/screen-reader.scss';
 
+$menu-width: 200px;
+
 .cmp-menu {
   display: flex;
   flex-direction: column;
   pointer-events: auto;
   min-width: 200px;
-  width: 200px;
+  width: $menu-width;
   top: 0;
   left: 0;
   padding: 15px;
   box-shadow: rgb(255 255 255 / 10%) -3px 0px 0px 0px inset;
+
+  &--collapsed {
+    display: none;
+  }
+
+  &__hamburger {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    &--opened {
+      top: 23px;
+      left: $menu-width;
+    }
+
+    &-text {
+      @include sr-only();
+    }
+  }
 
   &__add-note {
     display: flex;
@@ -31,6 +56,7 @@
       display: inline-block;
       padding: 8px;
       border: none;
+      margin-right: 16px;
       cursor: pointer;
       text-align: center;
       text-decoration: none;
