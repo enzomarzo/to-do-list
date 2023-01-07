@@ -59,7 +59,6 @@ const useNotes = (): IUseNotes => {
   };
 
   const editNote = (title: string, content: string, note: INote) => {
-    console.log(title, { content }, { note });
     if (!note) addNote(title);
     const updatedNotes = storedNotes.map((n) => (n === note ? { ...n, title, content } : n));
     setStoredNotes(updatedNotes);
