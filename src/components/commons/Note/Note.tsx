@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useMemo, useState } from 'react';
+import React, { FormEvent, KeyboardEventHandler, useEffect, useMemo, useState } from 'react';
 import styles from './note.module.scss';
 import { useRouter } from 'next/router';
 import { IUseNotes } from '../../../hooks/useNotes';
@@ -29,6 +29,13 @@ const Note = ({ noteActions }: IProps) => {
     note ? editNote(title, content, note) : addNote(title, content);
   };
 
+  const handleKeyboarSave: KeyboardEventHandler<HTMLDivElement> = (ev) => {
+    if ((ev.ctrlKey || ev.metaKey) && ev.key === 's') {
+      ev.preventDefault();
+      onSave();
+    }
+  };
+
   const onChangeTitle = (ev: FormEvent<HTMLInputElement>) => {
     const inputEl = ev.target as HTMLInputElement;
     setTitle(inputEl.value);
@@ -40,13 +47,14 @@ const Note = ({ noteActions }: IProps) => {
   };
 
   return (
-    <div className={styles['cmp-note']}>
+    <div onKeyDown={handleKeyboarSave} className={styles['cmp-note']}>
       <h1 className={styles['cmp-note__title']}>
         <input
           placeholder="Name a title"
           className={styles['cmp-note__title-input']}
           value={title}
-          onChange={onChangeTitle}></input>
+          onChange={onChangeTitle}
+        />
       </h1>
       <textarea
         className={styles['cmp-note__content']}
