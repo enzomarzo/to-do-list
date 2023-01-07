@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useMemo, useState } from 'react';
 import styles from './note.module.scss'
 import { useRouter } from 'next/router';
 import { IUseNotes } from '../../../hooks/useNotes';
-import Button from '../../foundation/Button';
+import Button from '../../foundation/Button/Button';
 
 interface IProps {
   noteActions: IUseNotes

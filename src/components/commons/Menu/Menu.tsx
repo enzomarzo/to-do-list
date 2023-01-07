@@ -3,7 +3,7 @@ import { INote, IUseNotes } from '../../../hooks/useNotes';
 import styles from './menu.module.scss'
 import { AiOutlinePlus, AiOutlineFileText, AiFillDelete } from 'react-icons/ai';
 import Link from 'next/link'
-import Button from '../../foundation/Button';
+import Button from '../../foundation/Button/Button';
 
 interface IProps {
   noteActions: IUseNotes
