@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const Note = ({ noteActions }: IProps) => {
-  const { getNote, editNote } = noteActions;
+  const { getNote, editNote, addNote } = noteActions;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const router = useRouter();
@@ -26,8 +26,7 @@ const Note = ({ noteActions }: IProps) => {
   }, [note]);
 
   const onSave = () => {
-    if (!note) return;
-    editNote(title, content, note);
+    note ? editNote(title, content, note) : addNote(title, content);
   };
 
   const onChangeTitle = (ev: FormEvent<HTMLInputElement>) => {
@@ -40,19 +39,21 @@ const Note = ({ noteActions }: IProps) => {
     setContent(contentEl.value);
   };
 
-  if (!note) return null;
-
   return (
     <div className={styles['cmp-note']}>
       <h1 className={styles['cmp-note__title']}>
-        <input className={styles['cmp-note__title-input']} value={title} onChange={onChangeTitle}></input>
+        <input
+          placeholder="Name a title"
+          className={styles['cmp-note__title-input']}
+          value={title}
+          onChange={onChangeTitle}></input>
       </h1>
       <textarea
         className={styles['cmp-note__content']}
         rows={10}
         value={content}
         onChange={onChangeContent}
-        placeholder="Add your notes"
+        placeholder="Add your notes. Do not forget to save it :)"
       />
       <Button className={styles['cmp-note__edit-button']} onClick={onSave}>
         Save

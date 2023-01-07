@@ -10,7 +10,7 @@ export interface INote {
 
 export interface IUseNotes {
   notes: [] | INote[];
-  addNote: (title: string) => void;
+  addNote: (title: string, content?: string) => void;
   deleteNote: (note: INote) => void;
   editNote: (title: string, content: string, note: INote) => void;
   getNote: (id: string) => INote | undefined;
@@ -35,9 +35,9 @@ const useNotes = (): IUseNotes => {
   }, [storedNotes]);
 
   const addNote = useCallback(
-    (title: string) => {
+    (title: string, content: string = '') => {
       if (!title) return;
-      const newNote: INote = { id: Date.now().toString(), title, content: '' };
+      const newNote: INote = { id: Date.now().toString(), title, content };
       setStoredNotes([...storedNotes, newNote]);
 
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...storedNotes, newNote]));
@@ -59,6 +59,8 @@ const useNotes = (): IUseNotes => {
   };
 
   const editNote = (title: string, content: string, note: INote) => {
+    console.log(title, { content }, { note });
+    if (!note) addNote(title);
     const updatedNotes = storedNotes.map((n) => (n === note ? { ...n, title, content } : n));
     setStoredNotes(updatedNotes);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedNotes));
