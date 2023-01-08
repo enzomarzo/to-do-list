@@ -45,26 +45,27 @@ const Menu = ({ noteActions }: IProps) => {
 
   const noteItems = (
     <ul className={styles['cmp-menu__list']}>
-      {sortedNotes?.map((note) => (
-        <div key={note.id} className={styles['cmp-menu__list-items']}>
-          <Link href={linkPath(note.id)} className={styles['cmp-menu__list-items-link']}>
-            <div>
-              <AiOutlineFileText className={styles['cmp-menu__list-items-icon']} />
-            </div>
-            <span className={styles['cmp-menu__list-items-text']}>{note.title}</span>
-          </Link>
-          <Button iconOnly className={styles['cmp-menu__list-items-remove']} onClick={() => onRemove(note)}>
-            <AiFillDelete className={styles['cmp-menu__list-items-remove-icon']} />
-            <span className={styles['cmp-menu__list-items-remove-text']}>Delete note</span>
-          </Button>
-        </div>
-      ))}
+      {sortedNotes &&
+        sortedNotes.map((note) => (
+          <div key={note.id} className={styles['cmp-menu__list-items']}>
+            <Link href={linkPath(note.id)} className={styles['cmp-menu__list-items-link']}>
+              <div>
+                <AiOutlineFileText className={styles['cmp-menu__list-items-icon']} />
+              </div>
+              <span className={styles['cmp-menu__list-items-text']}>{note.title}</span>
+            </Link>
+            <Button iconOnly className={styles['cmp-menu__list-items-remove']} onClick={() => onRemove(note)}>
+              <AiFillDelete className={styles['cmp-menu__list-items-remove-icon']} />
+              <span className={styles['cmp-menu__list-items-remove-text']}>Delete note</span>
+            </Button>
+          </div>
+        ))}
     </ul>
   );
 
   const menuToggle = menuVisible ? (
     <>
-      <AiOutlineMenu size="1.2em" className={styles['cmp-menu__hamburger-icon--closed']} />
+      <AiOutlineMenu size="1.5em" className={styles['cmp-menu__hamburger-icon--closed']} />
       <span className={styles['cmp-menu__hamburger-text']}>Open Menu</span>
     </>
   ) : (
@@ -74,9 +75,9 @@ const Menu = ({ noteActions }: IProps) => {
     </>
   );
 
-  const sortOptions = (
+  const sortOptions = sortedNotes && (
     <div className={styles['cmp-menu__sort']}>
-      <span>Sort by:</span>
+      <span>Sort by</span>
       <Button onClick={onSortByDate}>
         <span className={styles['cmp-menu__sort-options-text']}>Date</span>
       </Button>
