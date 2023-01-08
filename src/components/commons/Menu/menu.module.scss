@@ -13,6 +13,7 @@ $menu-width: 200px;
   left: 0;
   padding: 15px;
   box-shadow: rgb(255 255 255 / 10%) -3px 0px 0px 0px inset;
+  overflow: hidden;
 
   &--collapsed {
     display: none;
@@ -20,8 +21,8 @@ $menu-width: 200px;
 
   &__hamburger {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 24px;
+    left: 16px;
 
     @media (min-width: 768px) {
       display: none;
@@ -79,8 +80,14 @@ $menu-width: 200px;
     }
   }
 
+  &__list::-webkit-scrollbar {
+    display: none;
+  }
+
   &__list {
     width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
 
     &-items {
       display: flex;
@@ -113,5 +120,13 @@ $menu-width: 200px;
         margin-right: 4px;
       }
     }
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-top: auto;
+    gap: 8px;
   }
 }
