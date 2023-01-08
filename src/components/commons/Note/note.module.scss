@@ -3,8 +3,10 @@
 .cmp-note {
   width: 100%;
   padding: 20px;
+  overflow: auto;
 
   &__title {
+    padding-top: 16px;
     display: block;
     text-align: center;
 
@@ -18,15 +20,26 @@
     }
   }
 
+  &__content::-webkit-scrollbar {
+    display: none;
+  }
+
   &__content {
     padding-top: 20px;
     background: transparent;
     border: none;
+    overflow: auto;
+    height: 100%;
+
+    @media (min-width: 768px) {
+      height: 75%;
+    }
   }
 
   &__edit-button {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: px;
+    right: 32px;
+    top: 20px;
   }
 }
