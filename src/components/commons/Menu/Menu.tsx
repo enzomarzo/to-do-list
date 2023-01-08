@@ -12,6 +12,7 @@ interface IProps {
 
 const Menu = ({ noteActions }: IProps) => {
   const { notes, addNote, deleteNote } = noteActions;
+  const [sortedNotes, setSortedNotes] = useState(notes);
   const [menuVisible, setMenuVisible] = useState(true);
   const linkPath = (noteId: string) => `/?noteId=${noteId}`;
 
@@ -26,9 +27,25 @@ const Menu = ({ noteActions }: IProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    setSortedNotes(notes);
+  }, [notes]);
+
+  const onSortByDate = () => {
+    const sortByDate = [...notes].sort((a, b) => (a.id > b.id ? 1 : -1));
+    console.log({ sortByDate });
+    setSortedNotes(() => sortByDate);
+  };
+
+  const onSortByName = () => {
+    const sortByName = [...notes].sort((a, b) => (a.title > b.title ? 1 : -1));
+    console.log({ sortByName });
+    setSortedNotes(() => sortByName);
+  };
+
   const noteItems = (
     <ul className={styles['cmp-menu__list']}>
-      {notes?.map((note) => (
+      {sortedNotes?.map((note) => (
         <div key={note.id} className={styles['cmp-menu__list-items']}>
           <Link href={linkPath(note.id)} className={styles['cmp-menu__list-items-link']}>
             <div>
@@ -57,6 +74,18 @@ const Menu = ({ noteActions }: IProps) => {
     </>
   );
 
+  const sortOptions = (
+    <div className={styles['cmp-menu__sort']}>
+      <span>Sort by:</span>
+      <Button onClick={onSortByDate}>
+        <span className={styles['cmp-menu__sort-options-text']}>Date</span>
+      </Button>
+      <Button onClick={onSortByName}>
+        <span className={styles['cmp-menu__sort-options-text']}>Name</span>
+      </Button>
+    </div>
+  );
+
   return (
     <>
       <Button
@@ -68,6 +97,7 @@ const Menu = ({ noteActions }: IProps) => {
       <nav className={`${styles['cmp-menu']} ${menuVisible ? styles['cmp-menu--collapsed'] : ''}`}>
         <AddNote addNote={addNote} />
         {noteItems}
+        {sortOptions}
       </nav>
     </>
   );
