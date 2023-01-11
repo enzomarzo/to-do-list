@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-I choose to use Next because it provides tooling out of the box tooling and it is easy and fast to start.
+I chose to use Next because it provides out-of-the-box tools and is quick and easy to get started.
 
 ### Getting Started
 
