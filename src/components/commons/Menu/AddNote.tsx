@@ -12,8 +12,8 @@ const AddNote = ({ addNote }: IProps) => {
       onSubmit={(ev) => {
         ev.preventDefault();
         const form = ev.target as HTMLFormElement;
-        const imputEl = form.getElementsByTagName('input')[0] as HTMLInputElement;
-        addNote(imputEl.value);
+        const inputEl = form.getElementsByTagName('input')[0] as HTMLInputElement;
+        addNote(inputEl.value);
         form.reset();
       }}>
       <input
