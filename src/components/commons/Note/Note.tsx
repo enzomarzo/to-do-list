@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { IUseNotes } from '../../../hooks/useNotes';
 import Button from '../../foundation/Button/Button';
 
-interface IProps {
+export interface INoteProps {
   noteActions: IUseNotes;
 }
 
-const Note = ({ noteActions }: IProps) => {
+const Note = ({ noteActions }: INoteProps) => {
   const { getNote, editNote, addNote } = noteActions;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -29,7 +29,7 @@ const Note = ({ noteActions }: IProps) => {
     note ? editNote(title, content, note) : addNote(title, content);
   };
 
-  const handleKeyboarSave: KeyboardEventHandler<HTMLDivElement> = (ev) => {
+  const handleKeyboardSave: KeyboardEventHandler<HTMLDivElement> = (ev) => {
     if ((ev.ctrlKey || ev.metaKey) && ev.key === 's') {
       ev.preventDefault();
       onSave();
@@ -47,7 +47,7 @@ const Note = ({ noteActions }: IProps) => {
   };
 
   return (
-    <div onKeyDown={handleKeyboarSave} className={styles['cmp-note']}>
+    <div onKeyDown={handleKeyboardSave} className={styles['cmp-note']}>
       <h1 className={styles['cmp-note__title']}>
         <input
           placeholder="Name a title"
@@ -65,7 +65,7 @@ const Note = ({ noteActions }: IProps) => {
         onChange={onChangeContent}
         placeholder="Add your notes. Do not forget to save it :)"
       />
-      <Button className={styles['cmp-note__edit-button']} onClick={onSave}>
+      <Button testId="save" className={styles['cmp-note__edit-button']} onClick={onSave}>
         Save
       </Button>
     </div>
