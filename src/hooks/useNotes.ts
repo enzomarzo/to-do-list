@@ -1,7 +1,7 @@
 import { useState, useEffect, memo, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import querystring from 'querystring';
-
+import { nanoid } from 'nanoid';
 export interface INote {
   id: string; // Date.now() just to keep it simple, without having an external lib and being able to use a unique key
   title: string;
@@ -19,6 +19,7 @@ export interface IUseNotes {
 const LOCAL_STORAGE_KEY = 'notes';
 
 const useNotes = (): IUseNotes => {
+  const id = nanoid()
   const router = useRouter();
   const [storedNotes, setStoredNotes] = useState<INote[] | []>([]);
 
@@ -37,7 +38,7 @@ const useNotes = (): IUseNotes => {
   const addNote = useCallback(
     (title: string, content: string = '') => {
       if (!title) return;
-      const newNote: INote = { id: Date.now().toString(), title, content };
+      const newNote: INote = {id, title, content };
       setStoredNotes([...storedNotes, newNote]);
 
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...storedNotes, newNote]));
@@ -49,7 +50,7 @@ const useNotes = (): IUseNotes => {
       const query = querystring.parse(searchParams.toString());
       router.push({ pathname: router.pathname, query });
     },
-    [router, storedNotes]
+    [id, router, storedNotes]
   );
 
   const deleteNote = (note: INote) => {
@@ -74,7 +75,7 @@ const useNotes = (): IUseNotes => {
   );
 
   return {
-    notes: storedNotes,
+    notes: storedNotes || [],
     addNote,
     deleteNote,
     editNote,
