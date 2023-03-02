@@ -1,17 +1,22 @@
 import { render, fireEvent } from '@testing-library/react';
-import * as nextRouter from 'next/router';
+import mockRouter from 'next-router-mock';
+
+import { IUseNotes } from '../../../hooks/useNotes';
 import Note from './Note';
 
+jest.mock('next/router', () => require('next-router-mock'));
+
 describe('Note component', () => {
-  const noteActions = {
+  const noteActions: IUseNotes  = {
+    notes: [],
     getNote: jest.fn(),
     editNote: jest.fn(),
-    addNote: jest.fn()
+    addNote: jest.fn(),
+    deleteNote: jest.fn()
   };
 
-  nextRouter.useRouter = jest.fn();
-  nextRouter.useRouter.mockReturnValue({
-    query: { noteId: '001' }
+  beforeEach(() => {
+    mockRouter.push('/initial-path');
   });
 
   it('renders without throwing an error', () => {
@@ -28,10 +33,9 @@ describe('Note component', () => {
     const { container } = render(<Note noteActions={noteActions} />);
     const keyboardEvent = new KeyboardEvent('keydown', {
       key: 's',
-      ctrlKey: true,
+      ctrlKey: true
     });
     container.dispatchEvent(keyboardEvent);
     expect(noteActions.addNote).toHaveBeenCalled();
   });
-
 });
